@@ -8,7 +8,7 @@ class Aluno(models.Model):
     data_nascimento = models.DateField(blank=True, default="")
     celular = models.CharField(max_length=11, default="")
     foto = models.FileField(blank=True, default="")
-    des = models.CharField(max_length=11,blank=True, default="")
+
 
     def __str__(self):
         return self.nome
