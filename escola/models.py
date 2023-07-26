@@ -9,7 +9,6 @@ class Aluno(models.Model):
     celular = models.CharField(max_length=11, default="")
     foto = models.FileField(blank=True, default="")
 
-
     def __str__(self):
         return self.nome
 

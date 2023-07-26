@@ -87,6 +87,9 @@ def atualizar_aluno(request, pk):
         return Response({"error": "Aluno não encontrado."}, status=404)
 
     if request.method == 'PUT':
+        # Remove o campo 'foto' do dicionário request.data
+        request.data.pop('foto', None)
+
         serializer = AlunoSerializer(aluno, data=request.data)
         if serializer.is_valid():
             serializer.save()
