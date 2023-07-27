@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'escola',
     "corsheaders",
+
 ]
 
 MIDDLEWARE = [
@@ -137,6 +138,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
+
 }
 
 

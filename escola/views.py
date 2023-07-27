@@ -5,12 +5,16 @@ from escola.serializer import AlunoSerializer, AlunoSerializerV2, CursoSerialize
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.generics import UpdateAPIView
+from rest_framework import filters
+
+
 
 
 class AlunosViewSet(viewsets.ModelViewSet):
     """Exibindo todos os alunos e alunas"""
     queryset = Aluno.objects.all()
-
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['nome', 'cpf']
     def get_serializer_class(self):
         if self.request.version == 'v2':
             return AlunoSerializerV2
@@ -27,6 +31,13 @@ class EditarAlunoView(UpdateAPIView):
         # Obtém o aluno com base no parâmetro pk da URL
         pk = self.kwargs['pk']
         return Aluno.objects.get(pk=pk)
+
+class CustomSearchFilter(filters.SearchFilter):
+    def get_search_fields(self, view, request):
+        if request.query_params.get('nome'):
+            return ['nome']
+        return super().get_search_fields(view, request)
+
 
 
 class CursosViewSet(viewsets.ModelViewSet):
