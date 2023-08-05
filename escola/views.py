@@ -1,13 +1,11 @@
 from rest_framework import viewsets, generics
 from rest_framework import status
-from escola.models import Aluno, Curso, Matricula
-from escola.serializer import AlunoSerializer, AlunoSerializerV2, CursoSerializer, MatriculaSerializer, ListaMatriculasAlunoSerializer, ListaAlunosMatriculadosSerializer
+from escola.models import Aluno, Apolice, Curso, Matricula, TipoApolice, TipoVendaApolice
+from escola.serializer import AlunoSerializer, AlunoSerializerV2, ApoliceSerializer, CursoSerializer, MatriculaSerializer, ListaMatriculasAlunoSerializer, ListaAlunosMatriculadosSerializer, TipoApoliceSerializer, TipoVendaApoliceSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.generics import UpdateAPIView
 from rest_framework import filters
-
-
 
 
 class AlunosViewSet(viewsets.ModelViewSet):
@@ -78,6 +76,38 @@ class ListaAlunosMatriculados(generics.ListAPIView):
         return queryset
 
     serializer_class = ListaAlunosMatriculadosSerializer
+
+
+class TipoApoliceListCreateView(generics.ListCreateAPIView):
+    queryset = TipoApolice.objects.all()
+    serializer_class = TipoApoliceSerializer
+
+class TipoApoliceRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = TipoApolice.objects.all()
+    serializer_class = TipoApoliceSerializer
+
+# Views para TipoVendaApolice
+class TipoVendaApoliceListCreateView(generics.ListCreateAPIView):
+    queryset = TipoVendaApolice.objects.all()
+    serializer_class = TipoVendaApoliceSerializer
+
+class TipoVendaApoliceRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = TipoVendaApolice.objects.all()
+    serializer_class = TipoVendaApoliceSerializer
+
+# Views para Apolice
+class ApoliceListCreateView(generics.ListCreateAPIView):
+    queryset = Apolice.objects.all()
+    serializer_class = ApoliceSerializer
+
+class ApoliceRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Apolice.objects.all()
+    serializer_class = ApoliceSerializer
+
+
+
+
+
 
 
 @api_view(['POST'])

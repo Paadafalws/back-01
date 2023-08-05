@@ -1,6 +1,28 @@
 from django.db import models
 
 
+class TipoApolice(models.Model):
+    descricao = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.descricao
+
+class TipoVendaApolice(models.Model):
+    descricao = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.descricao
+
+class Apolice(models.Model):
+    descricao = models.CharField(max_length=200)
+    tipo_apolice = models.ForeignKey(TipoApolice, on_delete=models.CASCADE)
+    tipo_venda = models.ForeignKey(TipoVendaApolice, on_delete=models.CASCADE)
+    arquivo = models.FileField(default="")
+    
+    def __str__(self):
+        return self.descricao
+
+
 class Aluno(models.Model):
     nome = models.CharField(max_length=30,blank=True, default="")
     rg = models.CharField(max_length=9,blank=True, default="")
@@ -8,9 +30,11 @@ class Aluno(models.Model):
     data_nascimento = models.DateField(blank=True, default="")
     celular = models.CharField(max_length=11, default="")
     foto = models.FileField(blank=True, default="")
+    apolices = models.ManyToManyField(Apolice)
 
     def __str__(self):
         return self.nome
+
 
 class Curso(models.Model):
     NIVEL = (
